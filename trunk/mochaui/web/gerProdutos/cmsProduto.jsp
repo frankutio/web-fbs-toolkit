@@ -30,13 +30,13 @@
                 <input type="submit" name="ok" value="Cadastrar" />
             </dir>
         </form>
-
+        
         <br />
         <br />
 
-        <c:if test="${Erro != null}">
+        <c:if test="${Error != null}">
             Ops! parace que houve um erro ao tentar carregar o arquivo!<br />
-            Erro: ${Erro}
+            Erro: ${Error}
         </c:if>
     </body>
 </html>

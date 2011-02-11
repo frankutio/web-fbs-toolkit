@@ -1,6 +1,7 @@
 package Controle;
 
 import Entidades.Produto;
+import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -34,15 +35,58 @@ public class ServletProd extends HttpServlet {
         //LOG PARA TESTE
         System.out.println("Controle Acionado com Operacao: " + operacao);
 
-        String proximaPagina = "";
+        String proximaPagina ="";
 
-        if(operacao.equals("cadProd")){
 
-            proximaPagina="/index.jsp";
+        if(operacao.equals("login")){
+
+            Usuario usr = new Usuario();
+
+            usr.setNome("Frank");
+            usr.setSenha("123456");
+            usr.setLogin("frankutio");
+
+            String login = request.getParameter("usr");
+            String senha = request.getParameter("senha");
+
+            // Verifica se o usuario existe
+            if(usr.getLogin().equals(login)){
+
+                if(usr.getSenha().equals(senha)){
+              
+                    request.getSession().setAttribute("Login", 1);
+
+                    request.getSession().setAttribute("Usuario", usr);
+                }
+
+                else{
+                    request.getSession().removeAttribute("Login");
+                    request.getSession().removeAttribute("Usuario");
+
+                    request.setAttribute("MsgErro", "Senha Não confere!");
+
+                    proximaPagina ="/login.jsp";
+                }
+
+                proximaPagina = "/gerProdutos/cmsProduto.jsp";
+
+            }
+
+            else{
+                request.getSession().removeAttribute("Login");
+                request.setAttribute("MsgErro", "Login Não confere!");
+
+                proximaPagina ="/login.jsp";
+            }
+
+        }
+        
+
+        else if(operacao.equals("cadProd")){
 
             // Construindo a Classe do Produto
 
-            Produto prod = new Produto();
+            Produto prod = new Produto();           
             
 
             // Verifica se a requisicao e do tipo multipart
@@ -63,7 +107,7 @@ public class ServletProd extends HttpServlet {
                     if(fi.isFormField()){
 
                         if(fi.getFieldName().equals("nome")){
-                                prod.setNome(fi.getString());
+                                prod.setNome(fi.getString());                                
                             }
 
                         if(fi.getFieldName().equals("valor")){
@@ -74,21 +118,24 @@ public class ServletProd extends HttpServlet {
                                 prod.setDescricao(fi.getString());
                         }
 
+                        
+
                     }
 
                     else{
 
                     // Tratamento do contexto
-                       String nome = fi.getName().toString();
-                       String nomeArquivo = nome.substring(nome.lastIndexOf("\\")+1);
 
                     // Define a pasta e diretório do album do produto
 
-                       java.io.File f = new java.io.File(prod.getNome());
+                       java.io.File f = new java.io.File("/fraank.simiao/NetBeansProjects/mochaui/build/web/produtos/" + prod.getNome());
 
-                       String pasta = prod.getNome();
+                       f.mkdir();
 
-                       String diretorio ="/fraank.simiao/NetBeansProjects/mochaui/build/web/produtos/" + pasta + "/";
+                       String nome = fi.getName().toString();
+                       String nomeArquivo = nome.substring(nome.lastIndexOf("\\")+1);                    
+
+                       String diretorio ="/fraank.simiao/NetBeansProjects/mochaui/build/web/produtos/" + prod.getNome() + "/";
                        
                         // Cria um objeto file com nome do arquivo
                         // A pasta deve oferecer acesso de escrita para Conteiner
@@ -113,7 +160,7 @@ public class ServletProd extends HttpServlet {
                 }
             } catch (Exception ex) {
 
-                request.setAttribute("Erro", ex.getMessage());
+                request.setAttribute("Error", ex.getMessage());
 
                 proximaPagina = "/gerProdutos/cmsProduto.jsp";
 

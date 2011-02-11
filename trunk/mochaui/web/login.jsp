@@ -1,19 +1,49 @@
-<%-- 
-    Document   : login
-    Created on : 10/02/2011, 16:41:15
-    Author     : frank.simiao
---%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+        <title>Página de Login</title>
     </head>
+
     <body>
-        <h1>Hello World!</h1>
+        <h1>Login</h1>
+
+        <br />
+        <br />
+
+      <c:if test="${Login == null}">
+
+        <form name="formLog" action="/mochaui/produtos?operacao=login" method="post">
+
+            Usuário: <input type="text" name="usr" />
+            <br />
+            <br />
+
+            Senha: <input type="password" name="senha" />
+
+            <br />
+            <br />
+
+            <input type="submit" name="ok" value="Entrar" />
+        </form>
+
+        <br />
+        <br />
+
+        <c:if test="${MsgErro != null}">
+            <span style="color: red;">${MsgErro}</span>
+        </c:if>
+      </c:if>
+
+
+      <c:if test="${Login != null}">
+          Você já esta logado! <a href="/mochaui/gerProduto/cmsProduto.jsp">Clique aqui</a>
+      </c:if>
+
+
+            
     </body>
 </html>
