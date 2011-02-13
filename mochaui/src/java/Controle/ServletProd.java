@@ -92,114 +92,95 @@ public class ServletProd extends HttpServlet {
             Produto prod = new Produto();
             Produto produto = new Produto();
 
-            // Fabrica para arquivos baseados em disco
+            // Prepara a Servlet para trabalhar com upload
+
             DiskFileItemFactory factory = new DiskFileItemFactory();
 
             // Manipulador de upload de arquivos
             ServletFileUpload upload = new ServletFileUpload(factory);
-            
 
-            // Verifica se a requisicao e do tipo multipart
-        if (ServletFileUpload.isMultipartContent(request)) {
-            
+            if (ServletFileUpload.isMultipartContent(request)) {
 
             try {
-                // Recebe lista de campos do formulario
-                List<FileItem> itens = upload.parseRequest(request);
+                    // Recebe lista de campos do formulario
+                    List<FileItem> itens = upload.parseRequest(request);
 
-                for (FileItem fi : itens) {
+                    for (FileItem fi : itens) {
 
-                    if(fi.isFormField()){
+                        if (fi.isFormField()) {
+                           // Recebe os campos q nao sao file
 
-                        if(fi.getFieldName().equals("nome")){
+                          if(fi.getFieldName().equals("nome")){
                                 prod.setNome(fi.getString());
-                            }
+                          }
 
-                        if(fi.getFieldName().equals("valor")){
+                          if(fi.getFieldName().equals("valor")){
                                 prod.setValor(fi.getString());
-                        }
+                          }
 
-                        if(fi.getFieldName().equals("descricao")){
+                          if(fi.getFieldName().equals("descricao")){
                                 prod.setDescricao(fi.getString());
+                          }
+
+                        } else {
+
+                        // Cria a pasta no perfil do produto
+                        java.io.File f = new java.io.File(dir.getPastaUploadFrank() + prod.getNome());
+                        f.mkdir();
+
+                        String diretorio = dir.getPastaProdutoFrank() + prod.getNome() + "/";
+
+                        String nome = fi.getName().toString();
+                        String arquivo = nome.substring(nome.lastIndexOf("\\")+1);
+
+                            
+                        // Cria um objeto file com nome do arquivo
+                        // A pasta deve oferecer acesso de escrita para Conteiner
+                        File uploadedFile = new File(diretorio + arquivo);
+                        // Grava arquivo na pasta especificada
+                        fi.write(uploadedFile);
+
+                        // Grava o nome do arquivo no perfil do usuario
+                        produto.setArquivo(arquivo);
+
                         }
-
-                        
-
                     }
 
-                    else{
+                } catch (Exception ex) {
 
-                    
+                    request.setAttribute("Error", ex.getMessage());
 
-                       String nome = fi.getName().toString();
-                       String nomeArquivo = nome.substring(nome.lastIndexOf("\\")+1);
+                    proximaPagina = "/gerProdutos/cmsProduto.jsp";
 
-                       prod.setArquivo(nomeArquivo);
-
-                       
-                    }
+                    System.out.println(new Date() + " - Exception: " + ex.getMessage());
 
 
                 }
-            } catch (Exception ex) {
-
-                request.setAttribute("Error", ex.getMessage());
-
-                proximaPagina = "/gerProdutos/cmsProduto.jsp";
-
-                System.out.println(new Date() + " - Exception: " + ex.getMessage());
             }
 
-            //RECUPERA PARAMENTRO DESCRICAO
-            try{
+                //RECUPERA PARAMENTRO DESCRICAO
+                try{
 
-                produto.setNome(prod.getNome());
-                produto.setDescricao(prod.getDescricao());
-                produto.setValor(prod.getValor());
-                produto.setArquivo(prod.getArquivo());
+                    produto.setNome(prod.getNome());
+                    produto.setDescricao(prod.getDescricao());
+                    produto.setValor(prod.getValor());
 
-                // Tratamento do contexto
-
-                    // Define a pasta e diretório do album do produto
-
-                       java.io.File f = new java.io.File(dir.getPastaProdutoFrank() + produto.getNome());
-
-                       f.mkdir();
-
-                        String diretorio = dir.getPastaProdutoFrank() + produto.getNome() + "/";
-
-                        // Cria um objeto file com nome do arquivo
-                        // A pasta deve oferecer acesso de escrita para Conteiner
-                       File uploadedFile = new File(diretorio + produto.getArquivo());
-
-                       List<FileItem> itens = upload.parseRequest(request);
-
-                        for (FileItem fi : itens) {
-
-                            // Grava arquivo na pasta especificada
-                           fi.write(uploadedFile);
-
-                            // Grava o endereço do arquivo
-
-                            prod.setFoto(diretorio + produto.getArquivo());
-                        }
-
-                        produto.setFoto(prod.getFoto());
+                    produto.setFoto(prod.getFoto());
 
 
 
-                // Tudo certo, cria a sessão com os dados do produto
+                    // Tudo certo, cria a sessÃ£o com os dados do produto
 
-                request.getSession().setAttribute("Produto", produto);
-
-
-               proximaPagina = "/index.jsp";
+                    request.getSession().setAttribute("Produto", produto);
 
 
-            }catch(Exception e){
-                System.out.println(new Date() + " Erro: " + e.getMessage());
-            }
-        }
+                   proximaPagina = "/index.jsp";
+
+
+                }catch(Exception e){
+                    System.out.println(new Date() + " Erro: " + e.getMessage());
+                }
+
 
             
 
