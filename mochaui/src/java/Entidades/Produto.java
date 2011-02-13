@@ -6,6 +6,7 @@ public class Produto {
     private String nome;
     private String valor;
     private String descricao;
+    private String arquivo;
 
     /**
      * @return the foto
@@ -61,6 +62,20 @@ public class Produto {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    /**
+     * @return the pasta
+     */
+    public String getArquivo() {
+        return arquivo;
+    }
+
+    /**
+     * @param pasta the pasta to set
+     */
+    public void setArquivo(String arquivo) {
+        this.arquivo = arquivo;
     }
 
 }

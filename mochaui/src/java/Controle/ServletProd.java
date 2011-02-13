@@ -91,16 +91,17 @@ public class ServletProd extends HttpServlet {
 
             Produto prod = new Produto();
             Produto produto = new Produto();
-            
-
-            // Verifica se a requisicao e do tipo multipart
-        if (ServletFileUpload.isMultipartContent(request)) {
 
             // Fabrica para arquivos baseados em disco
             DiskFileItemFactory factory = new DiskFileItemFactory();
 
             // Manipulador de upload de arquivos
             ServletFileUpload upload = new ServletFileUpload(factory);
+            
+
+            // Verifica se a requisicao e do tipo multipart
+        if (ServletFileUpload.isMultipartContent(request)) {
+            
 
             try {
                 // Recebe lista de campos do formulario
@@ -111,7 +112,7 @@ public class ServletProd extends HttpServlet {
                     if(fi.isFormField()){
 
                         if(fi.getFieldName().equals("nome")){
-                                prod.setNome(fi.getString());                                
+                                prod.setNome(fi.getString());
                             }
 
                         if(fi.getFieldName().equals("valor")){
@@ -128,36 +129,14 @@ public class ServletProd extends HttpServlet {
 
                     else{
 
-                    // Tratamento do contexto
-
-                    // Define a pasta e diretório do album do produto
-
-                       java.io.File f = new java.io.File(dir.getPastaProdutoFrank() + prod.getNome());
-
-                       f.mkdir();
+                    
 
                        String nome = fi.getName().toString();
-                       String nomeArquivo = nome.substring(nome.lastIndexOf("\\")+1);                    
+                       String nomeArquivo = nome.substring(nome.lastIndexOf("\\")+1);
 
-                       String diretorio =dir.getPastaProdutoFrank() + prod.getNome() + "/";
+                       prod.setArquivo(nomeArquivo);
+
                        
-                        // Cria um objeto file com nome do arquivo
-                        // A pasta deve oferecer acesso de escrita para Conteiner
-                       File uploadedFile = new File(diretorio + nomeArquivo);
-
-                        // Grava arquivo na pasta especificada
-                       fi.write(uploadedFile);                        
-
-                        // Grava o endereço do arquivo
-
-                        prod.setFoto(diretorio + nomeArquivo);
-
-                        // Tudo certo, cria a sessão com os dados do produto
-
-                        request.getSession().setAttribute("Produto", prod);
-
-
-                       proximaPagina = "/index.jsp";
                     }
 
 
@@ -170,7 +149,6 @@ public class ServletProd extends HttpServlet {
 
                 System.out.println(new Date() + " - Exception: " + ex.getMessage());
             }
-        }
 
             //RECUPERA PARAMENTRO DESCRICAO
             try{
@@ -178,7 +156,37 @@ public class ServletProd extends HttpServlet {
                 produto.setNome(prod.getNome());
                 produto.setDescricao(prod.getDescricao());
                 produto.setValor(prod.getValor());
-                produto.setFoto(prod.getFoto());
+                produto.setArquivo(prod.getArquivo());
+
+                // Tratamento do contexto
+
+                    // Define a pasta e diretório do album do produto
+
+                       java.io.File f = new java.io.File(dir.getPastaProdutoFrank() + produto.getNome());
+
+                       f.mkdir();
+
+                        String diretorio = dir.getPastaProdutoFrank() + produto.getNome() + "/";
+
+                        // Cria um objeto file com nome do arquivo
+                        // A pasta deve oferecer acesso de escrita para Conteiner
+                       File uploadedFile = new File(diretorio + produto.getArquivo());
+
+                       List<FileItem> itens = upload.parseRequest(request);
+
+                        for (FileItem fi : itens) {
+
+                            // Grava arquivo na pasta especificada
+                           fi.write(uploadedFile);
+
+                            // Grava o endereço do arquivo
+
+                            prod.setFoto(diretorio + produto.getArquivo());
+                        }
+
+                        produto.setFoto(prod.getFoto());
+
+
 
                 // Tudo certo, cria a sessão com os dados do produto
 
@@ -191,6 +199,9 @@ public class ServletProd extends HttpServlet {
             }catch(Exception e){
                 System.out.println(new Date() + " Erro: " + e.getMessage());
             }
+        }
+
+            
 
         }
 
