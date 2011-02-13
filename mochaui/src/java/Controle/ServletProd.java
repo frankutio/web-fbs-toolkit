@@ -1,5 +1,6 @@
 package Controle;
 
+import Entidades.Diretorios;
 import Entidades.Produto;
 import Entidades.Usuario;
 import java.io.IOException;
@@ -36,6 +37,8 @@ public class ServletProd extends HttpServlet {
         System.out.println("Controle Acionado com Operacao: " + operacao);
 
         String proximaPagina ="";
+
+        Diretorios dir =new Diretorios();
 
 
         if(operacao.equals("login")){
@@ -128,14 +131,14 @@ public class ServletProd extends HttpServlet {
 
                     // Define a pasta e diretório do album do produto
 
-                       java.io.File f = new java.io.File("/fraank.simiao/NetBeansProjects/mochaui/build/web/produtos/" + prod.getNome());
+                       java.io.File f = new java.io.File(dir.getPastaProdutoFrank() + prod.getNome());
 
                        f.mkdir();
 
                        String nome = fi.getName().toString();
                        String nomeArquivo = nome.substring(nome.lastIndexOf("\\")+1);                    
 
-                       String diretorio ="/fraank.simiao/NetBeansProjects/mochaui/build/web/produtos/" + prod.getNome() + "/";
+                       String diretorio =dir.getPastaProdutoFrank() + prod.getNome() + "/";
                        
                         // Cria um objeto file com nome do arquivo
                         // A pasta deve oferecer acesso de escrita para Conteiner
