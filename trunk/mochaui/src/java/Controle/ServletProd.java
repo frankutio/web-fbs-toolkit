@@ -89,7 +89,8 @@ public class ServletProd extends HttpServlet {
 
             // Construindo a Classe do Produto
 
-            Produto prod = new Produto();           
+            Produto prod = new Produto();
+            Produto produto = new Produto();
             
 
             // Verifica se a requisicao e do tipo multipart
@@ -170,6 +171,26 @@ public class ServletProd extends HttpServlet {
                 System.out.println(new Date() + " - Exception: " + ex.getMessage());
             }
         }
+
+            //RECUPERA PARAMENTRO DESCRICAO
+            try{
+
+                produto.setNome(prod.getNome());
+                produto.setDescricao(prod.getDescricao());
+                produto.setValor(prod.getValor());
+                produto.setFoto(prod.getFoto());
+
+                // Tudo certo, cria a sessão com os dados do produto
+
+                request.getSession().setAttribute("Produto", produto);
+
+
+               proximaPagina = "/index.jsp";
+
+
+            }catch(Exception e){
+                System.out.println(new Date() + " Erro: " + e.getMessage());
+            }
 
         }
 
