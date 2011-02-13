@@ -1,6 +1,7 @@
 package Controle;
 
 import Entidades.Arquivo;
+import Entidades.Diretorios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -39,7 +40,9 @@ public class del extends HttpServlet {
 
         String arquivo = request.getParameter("arquivo");
 
-        String diretorio = "/fraank.simiao/NetBeansProjects/mochaui/build/web/arquivos/";
+        Diretorios dir = new Diretorios();
+
+        String diretorio = dir.getPastaUploadFrank();
 
         // Recebe parametro do formulario em questão
 
