@@ -14,9 +14,7 @@
         <br />
         <br />
 
-        <form name="cadPro" action="produtos?operacao=cadProd" method="post" enctype="multipart/form-data">
-
-            Foto do produto <input type="file" name="foto" /> <br /><br />
+        <form name="cadPro" action="produtos?operacao=cadProd" method="post" enctype="multipart/form-data">           
 
             Nome do produto <input type="text" name="nome" /> <br /><br />
 
@@ -25,6 +23,8 @@
             Descrição do produto:<br />
 
             <textarea name="descricao" rows="3" cols="60"></textarea> <br /><br />
+
+            Foto do produto <input type="file" name="foto" /> <br /><br />
 
             <dir align="center">
                 <input type="submit" name="ok" value="Cadastrar" />
