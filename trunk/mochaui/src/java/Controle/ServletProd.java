@@ -87,6 +87,8 @@ public class ServletProd extends HttpServlet {
 
         else if(operacao.equals("cadProd")){
 
+            // Verifica se o usuario ainda esta logado no sistema
+
             if(request.getSession().getAttribute("Login") != null){
                 proximaPagina="/gerProdutos/cmsProduto.jsp";
             }
@@ -136,8 +138,11 @@ public class ServletProd extends HttpServlet {
                         java.io.File f = new java.io.File(dir.getPastaProdutoMir() + prod.getNome());
                         f.mkdir();
 
+                        // Seta o diretorio em uma variavel pra uso posterior
                         String diretorio = dir.getPastaProdutoMir() + prod.getNome() + "/";
 
+
+                        //`Retira o nome do arquivo (Usado para corrigir bug do IE)
                         String nome = fi.getName().toString();
                         String arquivo = nome.substring(nome.lastIndexOf("\\")+1);
 
