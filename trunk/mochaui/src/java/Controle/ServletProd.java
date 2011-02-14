@@ -87,6 +87,14 @@ public class ServletProd extends HttpServlet {
 
         else if(operacao.equals("cadProd")){
 
+            if(request.getSession().getAttribute("Login") != null){
+                proximaPagina="/gerProdutos/cmsProduto.jsp";
+            }
+
+            else{
+                proximaPagina="/login.jsp";
+            }
+
             // Construindo a Classe do Produto
 
             Produto prod = new Produto();
@@ -125,10 +133,10 @@ public class ServletProd extends HttpServlet {
                         } else {
 
                         // Cria a pasta no perfil do produto
-                        java.io.File f = new java.io.File(dir.getPastaUploadFrank() + prod.getNome());
+                        java.io.File f = new java.io.File(dir.getPastaProdutoMir() + prod.getNome());
                         f.mkdir();
 
-                        String diretorio = dir.getPastaProdutoFrank() + prod.getNome() + "/";
+                        String diretorio = dir.getPastaProdutoMir() + prod.getNome() + "/";
 
                         String nome = fi.getName().toString();
                         String arquivo = nome.substring(nome.lastIndexOf("\\")+1);
@@ -142,10 +150,12 @@ public class ServletProd extends HttpServlet {
 
                         // Grava o nome do arquivo no perfil do usuario
                         produto.setArquivo(arquivo);
+                        prod.setFoto("/mochaui/produtos/" + prod.getNome() + "/" + arquivo);
 
                         }
                     }
 
+                    
                 } catch (Exception ex) {
 
                     request.setAttribute("Error", ex.getMessage());
@@ -158,7 +168,7 @@ public class ServletProd extends HttpServlet {
                 }
             }
 
-                //RECUPERA PARAMENTRO DESCRICAO
+            //RECUPERA PARAMENTRO DESCRICAO
                 try{
 
                     produto.setNome(prod.getNome());
@@ -182,7 +192,11 @@ public class ServletProd extends HttpServlet {
                 }
 
 
-            
+        }
+
+        else if(operacao.equals("listProd")){
+
+            proximaPagina="/produtos/produto.jsp";
 
         }
 
