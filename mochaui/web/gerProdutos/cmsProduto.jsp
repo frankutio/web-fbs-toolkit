@@ -14,7 +14,7 @@
         <br />
         <br />
 
-        <form name="cadPro" action="produtos?operacao=cadProd" method="post" enctype="multipart/form-data">           
+        <form name="cadPro" action="/mochaui/produtos?operacao=cadProd" method="post" enctype="multipart/form-data">
 
             Nome do produto <input type="text" name="nome" /> <br /><br />
 

@@ -87,15 +87,7 @@ public class ServletProd extends HttpServlet {
 
         else if(operacao.equals("cadProd")){
 
-            // Verifica se o usuario ainda esta logado no sistema
-
-            if(request.getSession().getAttribute("Login") != null){
-                proximaPagina="/gerProdutos/cmsProduto.jsp";
-            }
-
-            else{
-                proximaPagina="/login.jsp";
-            }
+            
 
             // Construindo a Classe do Produto
 
@@ -135,11 +127,11 @@ public class ServletProd extends HttpServlet {
                         } else {
 
                         // Cria a pasta no perfil do produto
-                        java.io.File f = new java.io.File(dir.getPastaProdutoMir() + prod.getNome());
+                        java.io.File f = new java.io.File(dir.getPastaProdutoFrank() + prod.getNome());
                         f.mkdir();
 
                         // Seta o diretorio em uma variavel pra uso posterior
-                        String diretorio = dir.getPastaProdutoMir() + prod.getNome() + "/";
+                        String diretorio = dir.getPastaProdutoFrank() + prod.getNome() + "/";
 
 
                         //`Retira o nome do arquivo (Usado para corrigir bug do IE)
@@ -184,7 +176,7 @@ public class ServletProd extends HttpServlet {
 
 
 
-                    // Tudo certo, cria a sessÃ£o com os dados do produto
+                    // Tudo certo, cria a sessão com os dados do produto
 
                     request.getSession().setAttribute("Produto", produto);
 

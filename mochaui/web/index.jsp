@@ -13,7 +13,7 @@
         <h1>Menu</h1>
         <ul>
             <li><a href="/mochaui/apaga.jsp">Upload</a></li>
-            <li><a href="/mochaui/produtos?operacao=cadProd">Cadastro de Produto</a></li>
+            <li><a href="/mochaui/gerProdutos/cmsProduto.jsp">Cadastro de Produto</a></li>
             <li><a href="/mochaui/produtos?operacao=listProd">Listar produtos</a></li>
         </ul>
         
