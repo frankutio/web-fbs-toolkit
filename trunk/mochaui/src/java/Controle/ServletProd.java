@@ -38,7 +38,7 @@ public class ServletProd extends HttpServlet {
 
         String proximaPagina ="";
 
-        Diretorios dir =new Diretorios();
+        Diretorios dir = new Diretorios();
 
 
         if(operacao.equals("login")){
@@ -60,6 +60,8 @@ public class ServletProd extends HttpServlet {
                     request.getSession().setAttribute("Login", 1);
 
                     request.getSession().setAttribute("Usuario", usr);
+
+                    proximaPagina = "/gerProdutos/cmsProduto.jsp";
                 }
 
                 else{
@@ -69,9 +71,7 @@ public class ServletProd extends HttpServlet {
                     request.setAttribute("MsgErro", "Senha Não confere!");
 
                     proximaPagina ="/login.jsp";
-                }
-
-                proximaPagina = "/gerProdutos/cmsProduto.jsp";
+                }                
 
             }
 
@@ -127,11 +127,11 @@ public class ServletProd extends HttpServlet {
                         } else {
 
                         // Cria a pasta no perfil do produto
-                        java.io.File f = new java.io.File(dir.getPastaProdutoFrank() + prod.getNome());
+                        java.io.File f = new java.io.File(dir.getPastaProdutoMir() + prod.getNome());
                         f.mkdir();
 
                         // Seta o diretorio em uma variavel pra uso posterior
-                        String diretorio = dir.getPastaProdutoFrank() + prod.getNome() + "/";
+                        String diretorio = dir.getPastaProdutoMir() + prod.getNome() + "/";
 
 
                         //`Retira o nome do arquivo (Usado para corrigir bug do IE)
