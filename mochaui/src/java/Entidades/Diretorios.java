@@ -1,16 +1,16 @@
 package Entidades;
 
 public class Diretorios {
-    private String pastaUploadMir = "/fraank.simiao/NetBeansProjects/mochaui/build/web/arquivos/";
+    private String pastaUploadMed = "/Users/Frank/Desktop/Dropbox/Projetos/toolkit/mochaui/build/web/arquivos/";
     private String pastaUploadFrank = "/Users/Administrador/Documents/Webs/Utilidade Java/mochaui/build/web/arquivos/";
-    private String pastaProdutoMir = "/fraank.simiao/NetBeansProjects/mochaui/build/web/produtos/";
+    private String pastaProdutoMed = "/Users/Frank/Desktop/Dropbox/Projetos/toolkit/mochaui/build/web/arquivos/";
     private String pastaProdutoFrank = "/Users/Administrador/Documents/Webs/Utilidade Java/mochaui/build/web/produtos/";
 
     /**
      * @return the pastaUploadMir
      */
-    public String getPastaUploadMir() {
-        return pastaUploadMir;
+    public String getPastaUploadMed() {
+        return pastaUploadMed;
     }
 
     /**
@@ -23,8 +23,8 @@ public class Diretorios {
     /**
      * @return the pastaProdutoMir
      */
-    public String getPastaProdutoMir() {
-        return pastaProdutoMir;
+    public String getPastaProdutoMed() {
+        return pastaProdutoMed;
     }
 
     /**
