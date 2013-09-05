@@ -16,7 +16,7 @@
 
         <table>
             <tr>
-                <td rowspan="2"><img src="${Produto.foto}" alt="${Produto.nome}" /></td>
+                <td rowspan="2"><img src="${Produto.foto}" alt="${Produto.nome}" height="300" width="300" /></td>
                 <td>Nome: <strong>${Produto.nome}</strong></td>
             </tr>
             <tr>

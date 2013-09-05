@@ -127,11 +127,11 @@ public class ServletProd extends HttpServlet {
                         } else {
 
                         // Cria a pasta no perfil do produto
-                        java.io.File f = new java.io.File(dir.getPastaProdutoMed() + prod.getNome());
+                        java.io.File f = new java.io.File(dir.getPastaProdutoFrank() + prod.getNome());
                         f.mkdir();
 
                         // Seta o diretorio em uma variavel pra uso posterior
-                        String diretorio = dir.getPastaProdutoMed() + prod.getNome() + "/";
+                        String diretorio = dir.getPastaProdutoFrank() + prod.getNome() + "/";
 
 
                         //`Retira o nome do arquivo (Usado para corrigir bug do IE)
@@ -147,7 +147,7 @@ public class ServletProd extends HttpServlet {
 
                         // Grava o nome do arquivo no perfil do usuario
                         produto.setArquivo(arquivo);
-                        prod.setFoto("/mochaui/arquivos/" + prod.getNome() + "/" + arquivo);
+                        prod.setFoto("/mochaui/produtos/" + prod.getNome() + "/" + arquivo);
 
                         }
                     }
