@@ -42,7 +42,7 @@ public class del extends HttpServlet {
 
         Diretorios dir = new Diretorios();
 
-        String diretorio = dir.getPastaUploadMed();
+        String diretorio = dir.getPastaUploadFrank();
 
         // Recebe parametro do formulario em questão
 
