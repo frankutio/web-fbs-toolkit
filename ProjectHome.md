@@ -1,0 +1,1 @@
+Este projeto traz um pouco de tudo, nele termos as principais operações que um portal Java pode ter, exemplos como upload e criação de diretórios para web é uma das coisas que este projeto abrange.
