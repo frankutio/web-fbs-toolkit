@@ -91,7 +91,7 @@ public class del extends HttpServlet {
 
                        
 
-                        String foto1 = "/mochaui/arquivos/" + nomeArquivo;
+                        String foto1 = "/arquivos/" + nomeArquivo;
 
                         // Grava o nome do arquivo no perfil do usuario
 

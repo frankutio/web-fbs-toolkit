@@ -147,7 +147,7 @@ public class ServletProd extends HttpServlet {
 
                         // Grava o nome do arquivo no perfil do usuario
                         produto.setArquivo(arquivo);
-                        prod.setFoto("/mochaui/produtos/" + prod.getNome() + "/" + arquivo);
+                        prod.setFoto("/produtos/" + prod.getNome() + "/" + arquivo);
 
                         }
                     }

@@ -16,7 +16,7 @@
 
       <c:if test="${Login == null}">
 
-        <form name="formLog" action="/mochaui/produtos?operacao=login" method="post">
+        <form name="formLog" action="/produtos?operacao=login" method="post">
 
             Usuário: <input type="text" name="usr" />
             <br />
@@ -40,7 +40,7 @@
 
 
       <c:if test="${Login != null}">
-          Você já esta logado! <a href="/mochaui/gerProduto/cmsProduto.jsp">Clique aqui</a>
+          Você já esta logado! <a href="/gerProduto/cmsProduto.jsp">Clique aqui</a>
       </c:if>
 
 
