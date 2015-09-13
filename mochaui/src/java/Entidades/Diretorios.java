@@ -2,9 +2,9 @@ package Entidades;
 
 public class Diretorios {
     private String pastaUploadMed = "/Users/Frank/Desktop/Dropbox/Projetos/toolkit/mochaui/build/web/arquivos/";
-    private String pastaUploadFrank = "/Users/Frank/Documents/Webs/Projetos/web-fbs-toolkit/mochaui/build/web/arquivos/";
+    private String pastaUploadFrank = "/Users/Frank/Documents/Webs/Projetos/GitHub/web-fbs-toolkit/mochaui/build/web/arquivos/";
     private String pastaProdutoMed = "/Users/Frank/Desktop/Dropbox/Projetos/toolkit/mochaui/build/web/arquivos/";
-    private String pastaProdutoFrank = "/Users/Frank/Documents/Webs/Projetos/web-fbs-toolkit/mochaui/build/web/produtos/";
+    private String pastaProdutoFrank = "/Users/Frank/Documents/Webs/Projetos/GitHub/web-fbs-toolkit/mochaui/build/web/produtos/";
 
     /**
      * @return the pastaUploadMir
